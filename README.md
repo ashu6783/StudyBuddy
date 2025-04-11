@@ -1,6 +1,14 @@
 # ExpertBuddy - Next.js Internship Assignment
 
-This project is a solution for the ExpertBuddy internship assignment. It showcases a fully responsive web application built with **Next.js v15**, **Tailwind CSS**, and modern component libraries such as **Shadcn/UI**, **Mantine**, and **Magic UI**, focusing on clean architecture, performance, and user experience.
+This project is a solution for the ExpertBuddy internship assignment. It showcases a fully responsive web application built with **Next.js v15**, **Tailwind CSS**, and modern component libraries such as **Shadcn/UI** and **Magic UI**, focusing on clean architecture, performance, and user experience .
+
+## ⚠️ Note:
+  1)  For opening any document first sign-up, it still holds it in local starage, it is not connected to any database still, filter works fine on mock data . Endpoint- api/documents/route.ts.
+  2) click on view document to view the sample document.
+
+### Improvements: 
+  Purchase Model still not implemented is to be done.
+  Documents by Type is to connected .
 
 ## Tech Stack :
 
