@@ -1,24 +1,37 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Menu } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { MagicCard } from './magicui/magic-card';
 
 export default function HeroSection() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const { theme } = useTheme();
+  const router = useRouter();
+
+  useEffect(() => {
+    const signedIn = localStorage.getItem('isSignedIn') === 'true';
+    setIsSignedIn(signedIn);
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const handleGetStarted = () => {
-    window.location.href = '/signup';
+    router.push('/signup');
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('isSignedIn');
+    setIsSignedIn(false);
+    router.push('/signin');
   };
 
   return (
@@ -35,7 +48,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Header with MagicCard */}
         <MagicCard
-           gradientColor={theme === 'dark' ? '#5D2EFF' : '#A414D5'}
+          gradientColor={theme === 'dark' ? '#5D2EFF' : '#A414D5'}
           className="rounded-3xl shadow-md p-2 md:p-4 mb-4"
         >
           <header className="flex justify-between items-center relative z-10 bg-white rounded-3xl px-2 md:px-4 py-3 md:py-4">
@@ -63,15 +76,27 @@ export default function HeroSection() {
               <a href="/become-tutor" className="text-black hover:text-purple-600 text-sm lg:text-base">
                 Become Tutor
               </a>
-              <a href="/signin" className="text-black hover:text-purple-600 text-sm lg:text-base">
-                Sign In
-              </a>
-              <Button
-                onClick={handleGetStarted}
-                className="bg-black text-white hover:bg-gray-800 rounded-full text-xs lg:text-sm"
-              >
-                Get Started For Free
-              </Button>
+
+              {isSignedIn ? (
+                <Button
+                  onClick={handleSignOut}
+                  className="bg-black text-white hover:bg-gray-800 rounded-full text-xs lg:text-sm"
+                >
+                  Sign Out
+                </Button>
+              ) : (
+                <>
+                  <a href="/signup" className="text-black hover:text-purple-600 text-sm lg:text-base">
+                    Sign In/Up
+                  </a>
+                  <Button
+                    onClick={handleGetStarted}
+                    className="bg-black text-white hover:bg-gray-800 rounded-full text-xs lg:text-sm"
+                  >
+                    Get Started For Free
+                  </Button>
+                </>
+              )}
             </div>
           </header>
 
@@ -91,22 +116,37 @@ export default function HeroSection() {
               >
                 Become Tutor
               </a>
-              <a
-                href="/signin"
-                className="text-black hover:text-purple-600 py-2"
-                onClick={toggleMobileMenu}
-              >
-                Sign In
-              </a>
-              <Button
-                onClick={() => {
-                  handleGetStarted();
-                  toggleMobileMenu();
-                }}
-                className="bg-black text-white hover:bg-gray-800 rounded-full w-full"
-              >
-                Get Started For Free
-              </Button>
+
+              {isSignedIn ? (
+                <Button
+                  onClick={() => {
+                    handleSignOut();
+                    toggleMobileMenu();
+                  }}
+                  className="bg-black text-white hover:bg-gray-800 rounded-full w-full"
+                >
+                  Sign Out
+                </Button>
+              ) : (
+                <>
+                  <a
+                    href="/signup"
+                    className="text-black hover:text-purple-600 py-2"
+                    onClick={toggleMobileMenu}
+                  >
+                    Sign In/Up
+                  </a>
+                  <Button
+                    onClick={() => {
+                      handleGetStarted();
+                      toggleMobileMenu();
+                    }}
+                    className="bg-black text-white hover:bg-gray-800 rounded-full w-full"
+                  >
+                    Get Started For Free
+                  </Button>
+                </>
+              )}
             </div>
           )}
         </MagicCard>

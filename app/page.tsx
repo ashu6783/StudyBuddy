@@ -11,7 +11,10 @@ import CustomOrderForm from '@/components/CustomOrderForm';
 import Image from 'next/image';
 import { VelocityScroll } from '@/components/magicui/scroll-based-velocity';
 
+
 export default function HomePage() {
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     type: 'all',
@@ -21,7 +24,6 @@ export default function HomePage() {
   });
   const [filteredDocuments, setFilteredDocuments] = useState(documents);
   const [displayedDocuments, setDisplayedDocuments] = useState<typeof documents>([]);
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -29,8 +31,6 @@ export default function HomePage() {
   const totalPages = Math.ceil(filteredDocuments.length / itemsPerPage);
 
   useEffect(() => {
-    const signedIn = localStorage.getItem('isSignedIn') === 'true';
-    setIsSignedIn(signedIn);
     fetchDocuments();
   }, []);
 
@@ -67,7 +67,7 @@ export default function HomePage() {
       const data = await response.json();
       setFilteredDocuments(data);
       if (window.innerWidth < 1024) {
-        setShowFilters(false); 
+        setShowFilters(false);
       }
     } catch (error) {
       console.error('Error applying filters:', error);
@@ -91,11 +91,6 @@ export default function HomePage() {
     window.location.href = `/document-details?id=${doc.id}`;
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem('isSignedIn');
-    setIsSignedIn(false);
-  };
-
   const toggleFilters = () => {
     setShowFilters(!showFilters);
   };
@@ -108,7 +103,6 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50" suppressHydrationWarning>
       <HeroSection />
 
-      {/* Document Section and Filters */}
       <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10">
         <div className="justify-center relative mb-6 sm:mb-10 flex flex-col items-center">
           <VelocityScroll className="text-lg sm:text-xl font-semibold text-[#9e1eaa] mb-2 sm:mb-4">
@@ -129,17 +123,9 @@ export default function HomePage() {
             Writing Inspiration in Our Data Base
           </h2>
 
-          {isSignedIn && (
-            <Button
-              onClick={handleSignOut}
-              className="mt-4 bg-red-600 hover:bg-red-700 text-white py-1 px-3 sm:py-2 sm:px-4 rounded-xl text-sm sm:text-base"
-            >
-              Sign Out
-            </Button>
-          )}
+
         </div>
 
-        {/* Mobile Filter Toggle Button */}
         <div className="lg:hidden mb-4 flex justify-center">
           <Button
             onClick={toggleFilters}
@@ -150,7 +136,6 @@ export default function HomePage() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Filters - Shown/hidden on mobile, always visible on desktop */}
           <div className={`${showFilters ? 'block' : 'hidden'} lg:block lg:w-1/3 order-1 lg:order-2`}>
             <AcademicFilterForm
               filters={filters}
@@ -159,7 +144,6 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Document Grid */}
           <div className="lg:w-2/3 order-2 lg:order-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {displayedDocuments.length > 0 ? (
@@ -183,7 +167,6 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Pagination - Simplify for mobile */}
             {filteredDocuments.length > 0 && (
               <div className="flex justify-center items-center flex-wrap mt-6 sm:mt-8 space-x-1 sm:space-x-2">
                 <Button onClick={() => goToPage(1)} disabled={currentPage === 1} variant="outline" className="px-2 sm:px-3 py-1 text-xs sm:text-sm mb-2">
@@ -223,12 +206,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Custom Order Form and Documents By Type */}
         <div className="max-w-6xl mx-auto pt-6 sm:pt-8 pb-4">
-
           <div className="w-full flex justify-center sm:px-4">
             <CustomOrderForm />
-
           </div>
           <div className="flex justify-center mt-4 sm:mt-6">
             <div className="w-full px-2 sm:px-4">

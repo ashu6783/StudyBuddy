@@ -7,10 +7,11 @@ import AnswerList from '@/components/AnswerList';
 import { Button } from '@/components/ui/button';
 import { documents } from '@/lib/data';
 import Image from 'next/image';
+import DocumentHeader from './DocumentHeader';
 
 export default function DocumentDetailsPage() {
     const searchParams = useSearchParams();
-    const router = useRouter(); 
+    const router = useRouter();
     const docId = searchParams.get('id');
     const [selectedDocument, setSelectedDocument] = useState<{
         id: string;
@@ -58,10 +59,13 @@ export default function DocumentDetailsPage() {
 
     return (
         <div className="min-h-screen bg-gray-50" suppressHydrationWarning>
+            {/* Place DocumentHeader at the top level */}
+            <DocumentHeader documentType={selectedDocument.type} subject={selectedDocument.subject} />
+
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="flex items-center mb-8">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                        <Image src='/document.svg' width={24} height={24} alt='document'/>
+                        <Image src='/document.svg' width={24} height={24} alt='document' />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800">Document Details</h2>
                     {isSignedIn && (
@@ -78,7 +82,12 @@ export default function DocumentDetailsPage() {
                     selectedDocument={selectedDocument}
                     onClose={() => setSelectedDocument(null)}
                 />
-                {isSignedIn && <AnswerList isSignedIn={isSignedIn} />}
+                {isSignedIn && selectedDocument && (
+                    <AnswerList
+                        isSignedIn={isSignedIn}
+                        subject={selectedDocument.subject} // this is crucial!
+                    />
+                )}
             </div>
         </div>
     );
