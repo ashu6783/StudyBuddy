@@ -63,6 +63,8 @@ This project is a solution for the ExpertBuddy internship assignment. It showcas
      npm run dev
 ## 📁 Project Structure
 
+
+
 ├── app/
 │   ├── layout.tsx               # Global layout
 │   ├── page.tsx                 # Landing page
