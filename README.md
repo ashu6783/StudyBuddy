@@ -61,39 +61,40 @@ This project is a solution for the ExpertBuddy internship assignment. It showcas
      (npm) along with those in package.json
 ### 3.Run the application:
      npm run dev
-## Project Structure: 
+## 📁 Project Structure
 
-app/
-  ├── layout.tsx             # App layout
-  ├── page.tsx               # Homepage
-  └── document-details/      # Dynamic route
-      └── page.tsx
-components/
-  ├── ui/                    # Shadcn/UI-based components
-  ├── MagicUI/               # Magic UI custom components
-  ├── reusables/
-  ├── AcademicFilterForm.tsx
-  ├── AnswerList.tsx
-  ├── CustomOrderForm.tsx
-  ├── Document.tsx
-  ├── DocumentCard.tsx
-  ├── DocumentCardDetails.tsx
-  ├── DocumentHeader.tsx
-  ├── DocumentbyType.tsx
-  ├── Hero-Section.tsx
-  ├── Hero-Section.tsx
-  ├── SmallCard.tsx
-  ├── StudyBankSection.tsx
-lib/
-  └── data.ts               # Mock data and documents\
-  └── utils.ts 
-  
-public/
-  └── document.svg           # Static assets
-  └──other images
-styles/
-  └── globals.css
-
+├── app/
+│   ├── layout.tsx               # Global layout
+│   ├── page.tsx                 # Landing page
+│   └── document-details/
+│       └── page.tsx             # Single document route
+│
+├── components/
+│   ├── ui/                      # Shadcn UI base components
+│   ├── magicui/                 # Magic UI wrappers
+│   ├── reusables/               # Reusable layouts / elements
+│   ├── AcademicFilterForm.tsx
+│   ├── AnswerList.tsx
+│   ├── CustomOrderForm.tsx
+│   ├── Document.tsx
+│   ├── DocumentCard.tsx
+│   ├── DocumentCardDetails.tsx
+│   ├── DocumentHeader.tsx
+│   ├── DocumentbyType.tsx
+│   ├── HeroSection.tsx
+│   ├── SmallCard.tsx
+│   └── StudyBankSection.tsx
+│
+├── lib/
+│   ├── data.ts                  # Mock document and answer data
+│   └── utils.ts                 # Utility functions
+│
+├── public/
+│   ├── logo.svg
+│   ├── pattern.svg
+│   └── other static assets
+│
+└── styles/
   
 ---------
 
