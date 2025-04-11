@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ExpertBuddy - Next.js Internship Assignment
 
-## Getting Started
+This project is a solution for the ExpertBuddy internship assignment. It showcases a fully responsive web application built with **Next.js v15**, **Tailwind CSS**, and modern component libraries such as **Shadcn/UI**, **Mantine**, and **Magic UI**, focusing on clean architecture, performance, and user experience.
 
-First, run the development server:
+## Tech Stack :
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** : Next.js
+- **Styling:** : Tailwind CSS
+- **UI Libraries:** : ShadCn, MagicUI
+- **Image Optimization:** `next/image`
+- **Icons:** `lucide-react`
+- **Deployment:** Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+##  Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+###  Core Functionalities
 
-## Learn More
+- Fully responsive layout (mobile-first with breakpoints)
+- Dynamic routing (e.g. `/document-details?id=123`)
+- Authentication modal with localStorage-based login state
+- Dynamic content rendering with mock data
+- Filter system for academic documents
+- AnswerList rendered based on selected document
+- Magic UI components: `BorderBeam`, `MagicCard`, etc.
+- Optimized image rendering and font loading
+- SEO-friendly via Next.js Metadata API
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. Clone the repository
+      git clone
+      cd expertbuddy
+### 2.Install Dependency :
+     (npm) along with those in package.json
+### 3.Run the application:
+     npm run dev
+## Project Structure: 
 
-## Deploy on Vercel
+app/
+  ├── layout.tsx             # App layout
+  ├── page.tsx               # Homepage
+  └── document-details/      # Dynamic route
+      └── page.tsx
+components/
+  ├── ui/                    # Shadcn/UI-based components
+  ├── MagicUI/               # Magic UI custom components
+  ├── reusables/
+  ├── AcademicFilterForm.tsx
+  ├── AnswerList.tsx
+  ├── CustomOrderForm.tsx
+  ├── Document.tsx
+  ├── DocumentCard.tsx
+  ├── DocumentCardDetails.tsx
+  ├── DocumentHeader.tsx
+  ├── DocumentbyType.tsx
+  ├── Hero-Section.tsx
+  ├── Hero-Section.tsx
+  ├── SmallCard.tsx
+  ├── StudyBankSection.tsx
+lib/
+  └── data.ts               # Mock data and documents\
+  └── utils.ts 
+  
+public/
+  └── document.svg           # Static assets
+  └──other images
+styles/
+  └── globals.css
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  
+---------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🌐 Deployment
+ The application is deployed on Vercel:
+🔗 Live URL: https://expertbuddy-assignment.vercel.app (replace with your actual URL)
+
+## Implementation Notes
+  Used useSearchParams() with Suspense boundaries due to CSR behavior.
+  Filter system built with controlled state and mock API logic.
+  Magic UI effects integrated externally via local component wrapping.
+  Responsive behavior handled with md, lg, and xl breakpoints.
+  Fonts loaded via next/font/google with preconnect strategy
+
+
+
+
+
+
