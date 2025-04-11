@@ -2,38 +2,53 @@
 
 This project is a solution for the ExpertBuddy internship assignment. It showcases a fully responsive web application built with **Next.js v15**, **Tailwind CSS**, and modern component libraries such as **Shadcn/UI** and **Magic UI**, focusing on clean architecture, performance, and user experience .
 
-## ⚠️ Note:
-  1)  For opening any document first sign-up, it still holds it in local starage, it is not connected to any database still, filter works fine on mock data . Endpoint- api/documents/route.ts.
-  2) click on view document to view the sample document.
+> ⚠️ **Note:**  
+> - No database is connected. Authentication is simulated using `localStorage`.  
+> - Document filtering and rendering use mock data from `/lib/data.ts`.  
+> - The "Purchase Model" and dynamic "Documents by Type" logic are under development.
 
 ### Improvements: 
   Purchase Model still not implemented is to be done.
   Documents by Type is to connected .
 
-## Tech Stack :
-
-- **Framework:** : Next.js
-- **Styling:** : Tailwind CSS
-- **UI Libraries:** : ShadCn, MagicUI
-- **Image Optimization:** `next/image`
-- **Icons:** `lucide-react`
-- **Deployment:** Vercel
 
 ---
 
-##  Features
 
-###  Core Functionalities
 
-- Fully responsive layout (mobile-first with breakpoints)
-- Dynamic routing (e.g. `/document-details?id=123`)
-- Authentication modal with localStorage-based login state
-- Dynamic content rendering with mock data
-- Filter system for academic documents
-- AnswerList rendered based on selected document
-- Magic UI components: `BorderBeam`, `MagicCard`, etc.
-- Optimized image rendering and font loading
-- SEO-friendly via Next.js Metadata API
+## Tech Stack
+
+| Tech             | Description                                          |
+|------------------|------------------------------------------------------|
+| **Next.js 15**   | App routing, SSR/CSR, dynamic metadata              |
+| **Tailwind CSS** | Utility-first styling framework                     |
+| **Shadcn/UI**    | Accessible, modern component library                |
+| **Magic UI**     | Gradient UI animations (MagicCard, BorderBeam)     |
+| **lucide-react** | Icon library for clean UI icons                     |
+| **next/image**   | Optimized image rendering for better performance   |
+| **Vercel**       | Hosting and CI/CD pipeline                         |
+
+
+## ✨ Features
+
+### 🔓 Authentication
+
+- Sign Up & Sign In forms (simulated with `localStorage`)
+- Automatically detects if a user is signed in
+- Shows **Sign Out** option dynamically in header
+
+### 📄 Document Viewer
+
+- View academic documents with meta details
+- Linked answers and subject-based filters
+
+### 🔎 Filtering System
+
+- Filter by:
+  - Subject Area
+  - Document Type
+  - Word Count
+  - Academic Level
 
 ---
 
