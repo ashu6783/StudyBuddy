@@ -62,16 +62,18 @@ export default function DocumentDetailsPage() {
             {/* Place DocumentHeader at the top level */}
             <DocumentHeader documentType={selectedDocument.type} subject={selectedDocument.subject} />
 
-            <div className="max-w-6xl mx-auto px-4 py-8">
-                <div className="flex items-center mb-8">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                        <Image src='/document.svg' width={24} height={24} alt='document' />
+            <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6 md:mb-8">
+                    <div className="flex items-center">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
+                            <Image src='/document.svg' width={24} height={24} alt='document' className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Document Details</h2>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-800">Document Details</h2>
                     {isSignedIn && (
                         <Button
                             onClick={handleSignOut}
-                            className="ml-4 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl"
+                            className="bg-red-600 hover:bg-red-700 text-white py-1 sm:py-2 px-3 sm:px-4 rounded-lg sm:rounded-xl text-sm w-full sm:w-auto sm:ml-auto mt-2 sm:mt-0"
                         >
                             Sign Out
                         </Button>

@@ -30,17 +30,17 @@ export default function AnswerList({ isSignedIn = false, subject }: AnswerListPr
         setLoading(false);
         return;
       }
-      
+
       try {
         setLoading(true);
         console.log(`Fetching answers for subject: ${subject}`);
-        
+
         const res = await fetch(`/api/documents?subject=${encodeURIComponent(subject.toLowerCase())}`);
-        
+
         if (!res.ok) {
           throw new Error(`Failed to fetch answers: ${res.status}`);
         }
-        
+
         const data = await res.json();
         console.log(`Received ${data.length} answers for subject: ${subject}`);
         setAnswers(data);
@@ -62,19 +62,24 @@ export default function AnswerList({ isSignedIn = false, subject }: AnswerListPr
   }
 
   return (
-    <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-200 max-w-3xl mx-auto mt-8">
-      <h2 className="text-xl font-semibold mb-6">Related Answers ({answers.length})</h2>
+    <div className="p-3 sm:p-4 md:p-6 bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm border border-gray-200 w-full max-w-3xl mx-auto mt-4 sm:mt-6 md:mt-8">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 md:mb-6">
+        Related Answers ({answers.length})
+      </h2>
 
       {loading ? (
-        <p className="text-gray-500">Loading related answers...</p>
+        <p className="text-gray-500 text-sm sm:text-base">Loading related answers...</p>
       ) : error ? (
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500 text-sm sm:text-base">{error}</p>
       ) : answers.length === 0 ? (
-        <p className="text-gray-500">No answers available for {subject}.</p>
+        <p className="text-gray-500 text-sm sm:text-base">No answers available for {subject}.</p>
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-6 sm:space-y-8 md:space-y-10">
           {answers.map((answer, index) => (
-            <div key={answer.id} className={index > 0 ? "pt-6 border-t border-gray-200" : ""}>
+            <div
+              key={answer.id}
+              className={index > 0 ? "pt-4 sm:pt-6 border-t border-gray-200" : ""}
+            >
               <AnswerCard
                 name={answer.title}
                 rating={4.5}
