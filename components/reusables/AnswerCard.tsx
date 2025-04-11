@@ -95,8 +95,8 @@ export default function AnswerCard({
       <BorderBeam
         duration={6}
         delay={3}
-        size={800}
-        className="from-transparent via-purple-600 to-transparent"
+        size={300}
+        className="absolute inset-0 sm:inset-[-1px] pointer-events-none from-transparent via-purple-600 to-transparent"
       />
     </Card>
   );
