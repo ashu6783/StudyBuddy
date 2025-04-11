@@ -77,7 +77,7 @@ styles/
 
 ## 🌐 Deployment
  The application is deployed on Vercel:
-🔗 Live URL: https://expertbuddy-assignment.vercel.app (replace with your actual URL)
+🔗 Live URL: https://study-buddy-henna-six.vercel.app
 
 ## Implementation Notes
   Used useSearchParams() with Suspense boundaries due to CSR behavior.
