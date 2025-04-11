@@ -61,9 +61,22 @@ This project is a solution for the ExpertBuddy internship assignment. It showcas
      (npm) along with those in package.json
 ### 3.Run the application:
      npm run dev
+
+
+## 🌐 Deployment
+ The application is deployed on Vercel:
+🔗 Live URL: https://study-buddy-henna-six.vercel.app
+
+## Implementation Notes
+  Used useSearchParams() with Suspense boundaries due to CSR behavior.
+  Filter system built with controlled state and mock API logic.
+  Magic UI effects integrated externally via local component wrapping.
+  Responsive behavior handled with md, lg, and xl breakpoints.
+  Fonts loaded via next/font/google with preconnect strategy
+
 ## 📁 Project Structure
 
-
+```bash
 
 ├── app/
 │   ├── layout.tsx               # Global layout
@@ -99,18 +112,6 @@ This project is a solution for the ExpertBuddy internship assignment. It showcas
 └── styles/
   
 ---------
-
-
-## 🌐 Deployment
- The application is deployed on Vercel:
-🔗 Live URL: https://study-buddy-henna-six.vercel.app
-
-## Implementation Notes
-  Used useSearchParams() with Suspense boundaries due to CSR behavior.
-  Filter system built with controlled state and mock API logic.
-  Magic UI effects integrated externally via local component wrapping.
-  Responsive behavior handled with md, lg, and xl breakpoints.
-  Fonts loaded via next/font/google with preconnect strategy
 
 
 
