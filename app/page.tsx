@@ -108,7 +108,7 @@ export default function HomePage() {
       <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10">
         <div className="justify-center relative mb-6 sm:mb-10 flex flex-col items-center">
           <VelocityScroll className="text-lg sm:text-xl font-semibold text-[#9e1eaa] mb-2 sm:mb-4">
-            Study Buddy Student Page
+            Expert Buddy Student Page
           </VelocityScroll>
 
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mt-6 sm:mt-10 relative inline-block text-center">
