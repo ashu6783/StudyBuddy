@@ -10,11 +10,10 @@ import { documents } from '@/lib/data';
 import CustomOrderForm from '@/components/CustomOrderForm';
 import Image from 'next/image';
 import { VelocityScroll } from '@/components/magicui/scroll-based-velocity';
+import LoadingScreen from '@/components/ui/loadingScreen';
 
 
 export default function HomePage() {
-
-
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     type: 'all',
@@ -78,6 +77,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+  
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     setDisplayedDocuments(filteredDocuments.slice(startIndex, endIndex));
@@ -96,7 +96,9 @@ export default function HomePage() {
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <LoadingScreen/>
+    );
   }
 
   return (
@@ -122,7 +124,6 @@ export default function HomePage() {
             </span>{" "}
             Writing Inspiration in Our Data Base
           </h2>
-
 
         </div>
 

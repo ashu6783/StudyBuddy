@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-
 import { useTheme } from 'next-themes';
 import { MagicCard } from '@/components/magicui/magic-card';
 

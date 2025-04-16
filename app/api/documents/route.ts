@@ -257,29 +257,21 @@ const allDocuments = [
   export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
   
-    const type = searchParams.get('type') || 'all';
+    const type = searchParams.get('type');
     const subject = searchParams.get('subject');
-    const academicLevel = searchParams.get('academicLevel') || 'any';
+    const academicLevel = searchParams.get('academicLevel');
     const minWords = parseInt(searchParams.get('minWords') || '0', 10);
     const maxWords = parseInt(searchParams.get('maxWords') || '1000000', 10);
   
-    let filtered = allDocuments;
-  
-    if (type !== 'all') {
-      filtered = filtered.filter((doc) => doc.type === type);
-    }
-  
-    if (subject) {
-      filtered = filtered.filter((doc) => doc.subject === subject);
-    }
-  
-    if (academicLevel !== 'any') {
-      filtered = filtered.filter((doc) => doc.academicLevel === academicLevel);
-    }
-  
-    filtered = filtered.filter(
-      (doc) => doc.wordCount >= minWords && doc.wordCount <= maxWords
-    );
+    const filtered = allDocuments.filter((doc) => {
+      return (
+        (!type || type === 'all' || doc.type === type) &&
+        (!subject || doc.subject === subject) &&
+        (!academicLevel || academicLevel === 'any' || doc.academicLevel === academicLevel) &&
+        doc.wordCount >= minWords &&
+        doc.wordCount <= maxWords
+      );
+    });
   
     return NextResponse.json(filtered);
   }

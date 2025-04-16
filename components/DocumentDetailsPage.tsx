@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DocumentSignupModal from '@/components/DocumentSignUpModal';
 import AnswerList from '@/components/AnswerList';
@@ -8,12 +8,14 @@ import { Button } from '@/components/ui/button';
 import { documents } from '@/lib/data';
 import Image from 'next/image';
 import DocumentHeader from './DocumentHeader';
+import DocumentLoader from './ui/loaderDocument';
 
 export default function DocumentDetailsPage() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const docId = searchParams.get('id');
-    const [selectedDocument, setSelectedDocument] = useState<{
+    
+    const [selectedDocument, setSelectedDocument] = useState<null | {
         id: string;
         title: string;
         content: string;
@@ -23,13 +25,16 @@ export default function DocumentDetailsPage() {
         subject: string;
         academicLevel: string;
         attachments?: string[];
-    } | null>(null);
+    }>(null);
+    
     const [isSignedIn, setIsSignedIn] = useState(false);
-    const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         const signedIn = localStorage.getItem('isSignedIn') === 'true';
         setIsSignedIn(signedIn);
+    }, []);
+
+    const fetchDocument = useCallback(() => {
         if (docId) {
             const doc = documents.find((d) => d.id === parseInt(docId));
             if (doc) {
@@ -40,33 +45,33 @@ export default function DocumentDetailsPage() {
                 });
             }
         }
-        setLoading(false);
     }, [docId]);
 
-    const handleSignOut = () => {
+    useEffect(() => {
+        fetchDocument();
+    }, [fetchDocument]);
+
+    const handleSignOut = useCallback(() => {
         localStorage.removeItem('isSignedIn');
         setIsSignedIn(false);
         router.push('/');
-    };
-
-    if (loading) {
-        return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-    }
+    }, [router]);
 
     if (!selectedDocument) {
-        return <div className="min-h-screen flex items-center justify-center">Document not found</div>;
+        return (
+          <DocumentLoader/>
+        );
     }
 
     return (
         <div className="min-h-screen bg-gray-50" suppressHydrationWarning>
-            {/* Place DocumentHeader at the top level */}
             <DocumentHeader documentType={selectedDocument.type} subject={selectedDocument.subject} />
 
             <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6 md:mb-8">
                     <div className="flex items-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
-                            <Image src='/document.svg' width={24} height={24} alt='document' className="w-5 h-5 sm:w-6 sm:h-6" />
+                            <Image src="/document.svg" width={24} height={24} alt="document" className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
                         <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Document Details</h2>
                     </div>
@@ -79,16 +84,10 @@ export default function DocumentDetailsPage() {
                         </Button>
                     )}
                 </div>
-                <DocumentSignupModal
-                    isSignedIn={isSignedIn}
-                    selectedDocument={selectedDocument}
-                    onClose={() => setSelectedDocument(null)}
-                />
+
+                <DocumentSignupModal isSignedIn={isSignedIn} selectedDocument={selectedDocument} onClose={() => setSelectedDocument(null)} />
                 {isSignedIn && selectedDocument && (
-                    <AnswerList
-                        isSignedIn={isSignedIn}
-                        subject={selectedDocument.subject} // this is crucial!
-                    />
+                    <AnswerList isSignedIn={isSignedIn} subject={selectedDocument.subject} />
                 )}
             </div>
         </div>
